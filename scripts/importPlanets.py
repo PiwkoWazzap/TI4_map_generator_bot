@@ -27,10 +27,13 @@ def read_json(str):
     except TypeError as e:
         fail('JSON does not match expected format', e)
 
-if __name__ == '__main__':
-    file = open(TEXT_FILE)
-    objects = file.readlines()
-    for obj in objects:
-        data = read_json(obj)
-        save_file(obj, data)
+def main():
+    with open(TEXT_FILE) as file:
+        objects = file.readlines()
+        for obj in objects:
+            data = read_json(obj)
+            save_file(obj, data)
     print('Done.')
+
+if __name__ == '__main__':
+    main()
