@@ -5,7 +5,7 @@ import importPlanets
 
 class TestPlanetImporter(unittest.TestCase):
 
-    def test_read_json_valid(self):
+    def test_read_json_valid_json(self):
         """Test that read_json correctly parses valid JSON."""
         valid_json = '{"id": 1, "name": "Earth"}'
         result = importPlanets.read_json(valid_json)
@@ -15,7 +15,7 @@ class TestPlanetImporter(unittest.TestCase):
     def test_read_json_invalid_json(self):
         """Test that read_json raises an error for invalid JSON."""
         invalid_json = '{"id": 1, "name": "Earth"'
-        with self.assertRaises(SystemExit):  # The code exits on failure
+        with self.assertRaises(SystemExit):
             importPlanets.read_json(invalid_json)
 
     def test_read_json_wrong_format(self):
@@ -45,7 +45,6 @@ class TestPlanetImporter(unittest.TestCase):
             with patch("importPlanets.DESTINATION_DIR", "/mock/dir/"):
                 importPlanets.main()
 
-        # Ensure save_file is called twice (once per line in the text file)
         self.assertEqual(mock_save_file.call_count, 2)
 
     @patch("builtins.print")
